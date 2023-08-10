@@ -18,10 +18,10 @@ jobs:
       - name: Instalar Dependências
         run: npm install
 
-      - name: Configurar Docker
-        uses: docker/setup-docker@v2
+      - name: Docker Compose
+      - uses: KengoTODA/actions-setup-docker-compose@v1
         with:
-          docker-host: tcp://localhost:2375
+          version: '3.8' # the full version of `docker-compose` command
 
       - name: Iniciar Banco de Dados MongoDB usando Docker Compose
         run: docker-compose up -d
