@@ -19,7 +19,7 @@ jobs:
         run: npm install
 
       - name: Docker Compose
-      - uses: KengoTODA/actions-setup-docker-compose@v1
+        uses: KengoTODA/actions-setup-docker-compose@v1
         with:
           version: '3.8' # the full version of `docker-compose` command
 
