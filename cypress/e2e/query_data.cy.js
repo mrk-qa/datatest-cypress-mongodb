@@ -1,73 +1,49 @@
-require('dotenv').config()
-const collection = process.env.MONGO_COLLECTION
-const database = process.env.MONGO_DB
-const options = { collection: collection, database: database }
-
 const number = Math.floor(Math.random() * 1000)
-
+const options = { collection: 'types', database: 'pokemon' }
 
 describe('consultando dados do DB', () => {
   
   it('[query] consulta pelo "name"', () => {
     cy.section('consultar e salvar a query')
-    cy.findMany({ index: '3' }, { collection: 'types', database: 'pokemon' }).then(res => {
+    cy.findMany({ index: '3' }, options).then(res => {
       const data = JSON.stringify(res)
       cy.task('log', data)
       cy.writeFile('cypress/fixtures/query/query_many_name.json', res)
     })
 
-    // cy.section('salvar query')
-    // cy.get('@queryResult').then(res => {
-    //   const data = JSON.stringify(res)
-    //   cy.task('log', data)
-    //   cy.writeFile('cypress/fixtures/query/query_many_name.json', res)
-    // })
-
-    // cy.findOne({ index: '3' }, { collection: 'types', database: 'pokemon'}).then(res => {
-    //   const data = JSON.stringify(res)
-    //   cy.task('log', data)
-    //   cy.writeFile('cypress/fixtures/query/query_many_name.json', result)
-    // })
-
-    // cy.findMany({ index: '3' }, { collection: 'types', database: 'pokemon'}).then(res => {
-    //   const data = JSON.stringify(res)
-    //   cy.task('log', data)
-    // })
-
     cy.section('dados esperados')
-    cy.fixture('query/query_many_name.json').then(result => {
-      cy.log(result)
-      const data = JSON.stringify(result)
+    cy.fixture('query/query_many_name.json').then(res => {
+      const data = JSON.stringify(res)
       cy.task('log', data)
-      console.log(data)
-      expect(result[0].name).to.eq('Venusaur')
+      expect(res[0].name).to.eq('Venusaur')
     })
   })
 
   it('[query] consulta pelo type "water"', () => {
-    cy.section('consultar')
-    cy.queryMany({ pokemon_type1: 'water' }).as('queryResult')
-
-    cy.section('salvar query')
-    cy.get('@queryResult').then(result => {
-      cy.log(result)
-      // cy.writeFile('cypress/fixtures/query/query_many_type_water.json', res)
+    cy.section('consultar e salvar query')
+    cy.findMany({ pokemon_type1: 'water' }, options).then(res => {
+      const data = JSON.stringify(res)
+      cy.task('log', data)
+      cy.writeFile('cypress/fixtures/query/query_many_type_water.json', res)
     })
 
     cy.section('dados esperados')
-    // cy.fixture('query/query_many_type_water.json').then(res => {
-    //   const data = JSON.stringify(res[0].pokemon_type1)
-    //   cy.task('log', data)
-      // expect(res[0].pokemon_type1).to.equal('water')
-    // })
+    cy.fixture('query/query_many_type_water.json').then(res => {
+      const data = JSON.stringify(res[0].pokemon_type1)
+      cy.task('log', data)
+      expect(res[0].pokemon_type1).to.equal('water')
+    })
   })
 
   it('[query] consulta um dado e exclui pelo "index", depois realiza consulta e valida se foi excluído', () => {
+    const indexNumber = number.toString()
+
     cy.section('consultar um e deletar')
-    cy.findOneAndDelete({ index: number })
+    cy.findOneAndDelete({ index: indexNumber }, options)
 
     cy.section('consultar')
-    cy.findOne({ index: number }).then(res => {
+    
+    cy.findOne({ index: indexNumber }, options).then(res => {
       expect(res).to.not.exist
     })
   })
@@ -76,38 +52,35 @@ describe('consultando dados do DB', () => {
     cy.section('consultar um e atualizar')
     cy.findOneAndUpdate({ index: '348' }, { $set: { pokemon_type2: '' } })
 
-    cy.section('consultar')
-    cy.queryMany({ index: '348' }).as('queryResult')
-
-    cy.section('salvar query')
-    cy.get('@queryResult').then(result => {
-      cy.log(result)
-      // cy.writeFile('cypress/fixtures/query/query_many_index_and_update_pokemon_type2.json', res)
+    cy.section('consultar e salvar query')
+    cy.findMany({ index: '348' }, options).then(res => {
+      const data = JSON.stringify(res)
+      cy.task('log', data)
+      cy.writeFile('cypress/fixtures/query/query_many_index_and_update_pokemon_type2.json', res)
     })
 
     cy.section('dados esperados')
-    // cy.fixture('query/query_many_index_and_update_pokemon_type2.json').then(res => {
-    //   const data = JSON.stringify(res[0].pokemon_type2)
-    //   cy.task('log', data)
-      // expect(res[0].pokemon_type2).to.equal('')
-    // })
+    cy.fixture('query/query_many_index_and_update_pokemon_type2.json').then(res => {
+      const data = JSON.stringify(res[0].pokemon_type2)
+      cy.task('log', data)
+      expect(res[0].pokemon_type2).to.equal('')
+    })
   })
 
   it('[query] consulta muitos dados de acordo com o "pokemon_type1"', () => {
-    cy.section('consultar')
-    cy.queryMany({ pokemon_type1: 'bug' }).as('queryResult')
-
-    cy.section('salvar query')
-    cy.get('@queryResult').then(result => {
-      cy.log(result)
-      // cy.writeFile('cypress/fixtures/query/query_many_pokemon_type1.json', res)
+    cy.section('consultar e salvar query')
+    cy.queryMany({ pokemon_type1: 'bug' }, options).then(res => {
+      const data = JSON.stringify(res)
+      cy.task('log', data)
+      cy.writeFile('cypress/fixtures/query/query_many_pokemon_type1.json', res)
     })
 
     cy.section('dados esperados')
-    // cy.fixture('query/query_many_pokemon_type1.json').then(result => {
-    //   cy.log(result)
-      // expect(res[0].pokemon_type1).to.equal('bug')
-    // })
+    cy.fixture('query/query_many_pokemon_type1.json').then(res => {
+      const data = JSON.stringify(res)
+      cy.task('log', data)
+      expect(res[0].pokemon_type1).to.equal('bug')
+    })
   })
 
 })
