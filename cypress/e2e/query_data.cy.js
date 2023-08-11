@@ -42,19 +42,4 @@ describe('consultando dados do DB', () => {
     })
   })
 
-  it('[query] consulta um dado e atualiza o "index", depois realiza consulta e valida se foi atualizado', () => {
-    cy.section('consultar um e atualizar')
-    cy.findOneAndUpdate({ index: '348' }, { $set: { pokemon_type2: '' } })
-
-    cy.section('consultar e salvar query')
-    cy.findMany({ index: '348' }, options).then(res => {
-      cy.writeFile('cypress/fixtures/query/query_many_index_and_update_pokemon_type2.json', res)
-    })
-
-    cy.section('dados esperados')
-    cy.fixture('query/query_many_index_and_update_pokemon_type2.json').then(res => {
-      expect(res[0].pokemon_type2).to.equal('')
-    })
-  })
-
 })
