@@ -7,28 +7,30 @@ describe('consultando dados do DB', () => {
     cy.queryMany({ index: '3' }).as('queryResult')
 
     cy.section('salvar query')
-    cy.get('@queryResult').then(result => {
-      cy.log(result)
-      cy.writeFile('cypress/fixtures/query/query_many_name.json', result)
-    })
-
-    cy.findOne({ index: '3' }, { collection: 'types', database: 'pokemon'}).then(res => {
+    cy.get('@queryResult').then(res => {
       const data = JSON.stringify(res)
       cy.task('log', data)
+      cy.writeFile('cypress/fixtures/query/query_many_name.json', res)
     })
 
-    cy.findMany({ index: '3' }, { collection: 'types', database: 'pokemon'}).then(res => {
-      const data = JSON.stringify(res)
-      cy.task('log', data)
-    })
+    // cy.findOne({ index: '3' }, { collection: 'types', database: 'pokemon'}).then(res => {
+    //   const data = JSON.stringify(res)
+    //   cy.task('log', data)
+    //   cy.writeFile('cypress/fixtures/query/query_many_name.json', result)
+    // })
+
+    // cy.findMany({ index: '3' }, { collection: 'types', database: 'pokemon'}).then(res => {
+    //   const data = JSON.stringify(res)
+    //   cy.task('log', data)
+    // })
 
     cy.section('dados esperados')
-    cy.readFile('cypress//fixtures//query//query_many_name.json').then(result => {
+    cy.fixture('query/query_many_name.json').then(result => {
       cy.log(result)
       const data = JSON.stringify(result)
       cy.task('log', data)
       console.log(data)
-      // expect(res[0].name).to.eq('Venusaur')
+      expect(result[0].name).to.eq('Venusaur')
     })
   })
 
