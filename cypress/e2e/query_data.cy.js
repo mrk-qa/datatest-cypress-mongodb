@@ -13,10 +13,11 @@ describe('consultando dados do DB', () => {
     })
 
     cy.section('dados esperados')
-    cy.fixture('query/query_many_name.json').then(result => {
+    cy.readFile('cypress//fixtures//query//query_many_name.json').then(result => {
       cy.log(result)
       const data = JSON.stringify(result)
       cy.task('log', data)
+      console.log(data)
       // expect(res[0].name).to.eq('Venusaur')
     })
   })
