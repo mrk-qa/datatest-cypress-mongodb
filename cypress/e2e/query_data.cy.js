@@ -9,7 +9,7 @@ describe('consultando dados do DB', () => {
     cy.section('salvar query')
     cy.get('@queryResult').then(result => {
       cy.log(result)
-      cy.writeFile('cypress/fixtures/query/query_many_name.json', res)
+      cy.writeFile('cypress/fixtures/query/query_many_name.json', result)
     })
 
     cy.section('dados esperados')
