@@ -10,7 +10,7 @@ describe('consultando dados do DB', () => {
   
   it('[query] consulta pelo "name"', () => {
     cy.section('consultar e salvar a query')
-    cy.findMany({ index: '3' }, options).then(res => {
+    cy.findMany({ index: '3' }, { collection: 'types', database: 'pokemon' }).then(res => {
       const data = JSON.stringify(res)
       cy.task('log', data)
       cy.writeFile('cypress/fixtures/query/query_many_name.json', res)
