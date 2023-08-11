@@ -13,7 +13,7 @@ describe('excluindo dados do DB', () => {
             cy.task('log', data)
         })
 
-        cy.section('derrubar')
+        cy.section('derrubar collection')
         cy.dropCollection(name, { database: 'test' }).then(res => {
             const data = JSON.stringify(res)
             cy.task('log', data)
