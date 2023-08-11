@@ -13,10 +13,10 @@ describe('consultando dados do DB', () => {
     })
 
     cy.section('dados esperados')
-    cy.fixture('query/query_many_name.json').then(result => {
-      cy.log(result)
+    // cy.fixture('query/query_many_name.json').then(result => {
+    //   cy.log(result)
       // expect(res[0].name).to.eq('Venusaur')
-    })
+    // })
   })
 
   it('[query] consulta pelo type "water"', () => {
@@ -30,11 +30,11 @@ describe('consultando dados do DB', () => {
     })
 
     cy.section('dados esperados')
-    cy.fixture('query/query_many_type_water.json').then(res => {
-      const data = JSON.stringify(res[0].pokemon_type1)
-      cy.task('log', data)
+    // cy.fixture('query/query_many_type_water.json').then(res => {
+    //   const data = JSON.stringify(res[0].pokemon_type1)
+    //   cy.task('log', data)
       // expect(res[0].pokemon_type1).to.equal('water')
-    })
+    // })
   })
 
   it('[query] consulta um dado e exclui pelo "index", depois realiza consulta e valida se foi excluído', () => {
@@ -61,11 +61,11 @@ describe('consultando dados do DB', () => {
     })
 
     cy.section('dados esperados')
-    cy.fixture('query/query_many_index_and_update_pokemon_type2.json').then(res => {
-      const data = JSON.stringify(res[0].pokemon_type2)
-      cy.task('log', data)
+    // cy.fixture('query/query_many_index_and_update_pokemon_type2.json').then(res => {
+    //   const data = JSON.stringify(res[0].pokemon_type2)
+    //   cy.task('log', data)
       // expect(res[0].pokemon_type2).to.equal('')
-    })
+    // })
   })
 
   it('[query] consulta muitos dados de acordo com o "pokemon_type1"', () => {
@@ -79,10 +79,10 @@ describe('consultando dados do DB', () => {
     })
 
     cy.section('dados esperados')
-    cy.fixture('query/query_many_pokemon_type1.json').then(result => {
-      cy.log(result)
+    // cy.fixture('query/query_many_pokemon_type1.json').then(result => {
+    //   cy.log(result)
       // expect(res[0].pokemon_type1).to.equal('bug')
-    })
+    // })
   })
 
 })
