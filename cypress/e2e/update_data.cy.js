@@ -7,7 +7,7 @@ describe('atualizando dados do DB', () => {
         cy.updateOne({ name: 'Kingdra' }, { $set: { name: 'Shiny Kingdra' } })
 
         cy.section('consultar')
-        cy.queryMany({ name: 'Shiny Kingdra' })
+        cy.queryMany({ name: 'Shiny Kingdra' }).as('queryResult')
     
         cy.section('salvar query')
         cy.get('@queryResult').then(res => {
@@ -32,7 +32,7 @@ describe('atualizando dados do DB', () => {
         cy.updateOne({ index: indexNumber }, { $set: { name: 'Shiny Blastoise' } })
 
         cy.section('consultar')
-        cy.queryMany({ index: indexNumber })
+        cy.queryMany({ index: indexNumber }).as('queryResult')
     
         cy.section('salvar query')
         cy.get('@queryResult').then(res => {

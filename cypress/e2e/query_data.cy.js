@@ -4,7 +4,7 @@ describe('consultando dados do DB', () => {
   
   it('[query] consulta pelo "name"', () => {
     cy.section('consultar')
-    cy.queryMany({ index: '3' })
+    cy.queryMany({ index: '3' }).as('queryResult')
 
     cy.section('salvar query')
     cy.get('@queryResult').then(res => {
@@ -23,7 +23,7 @@ describe('consultando dados do DB', () => {
 
   it('[query] consulta pelo type "water"', () => {
     cy.section('consultar')
-    cy.queryMany({ pokemon_type1: 'water' })
+    cy.queryMany({ pokemon_type1: 'water' }).as('queryResult')
 
     cy.section('salvar query')
     cy.get('@queryResult').then(res => {
@@ -55,7 +55,7 @@ describe('consultando dados do DB', () => {
     cy.findOneAndUpdate({ index: '348' }, { $set: { pokemon_type2: '' } })
 
     cy.section('consultar')
-    cy.queryMany({ index: '348' })
+    cy.queryMany({ index: '348' }).as('queryResult')
 
     cy.section('salvar query')
     cy.get('@queryResult').then(res => {
@@ -74,7 +74,7 @@ describe('consultando dados do DB', () => {
 
   it('[query] consulta muitos dados de acordo com o "pokemon_type1"', () => {
     cy.section('consultar')
-    cy.queryMany({ pokemon_type1: 'bug' })
+    cy.queryMany({ pokemon_type1: 'bug' }).as('queryResult')
 
     cy.section('salvar query')
     cy.get('@queryResult').then(res => {
