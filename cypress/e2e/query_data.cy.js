@@ -9,6 +9,9 @@ describe('consultando dados do DB', () => {
     cy.section('salvar query')
     cy.get('@queryResult').then(result => {
       cy.log(result)
+
+      const data = JSON.stringify(result)
+      cy.task('log', data)
       // cy.writeFile('cypress/fixtures/query/query_many_name.json', res)
     })
 
