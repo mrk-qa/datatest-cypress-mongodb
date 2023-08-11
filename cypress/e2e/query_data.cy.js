@@ -12,12 +12,12 @@ describe('consultando dados do DB', () => {
       cy.writeFile('cypress/fixtures/query/query_many_name.json', result)
     })
 
-    cy.findOne({ index: '3' }).then(res => {
+    cy.findOne({ index: '3' }, { collection: 'types', database: 'pokemon'}).then(res => {
       const data = JSON.stringify(res)
       cy.task('log', data)
     })
 
-    cy.findMany({ index: '3' }).then(res => {
+    cy.findMany({ index: '3' }, { collection: 'types', database: 'pokemon'}).then(res => {
       const data = JSON.stringify(res)
       cy.task('log', data)
     })
