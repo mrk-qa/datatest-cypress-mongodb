@@ -1,17 +1,27 @@
+require('dotenv').config()
+const collection = process.env.MONGO_COLLECTION
+const database = process.env.MONGO_DB
+const options = { collection: collection, database: database }
+
 const number = Math.floor(Math.random() * 1000)
+
 
 describe('consultando dados do DB', () => {
   
   it('[query] consulta pelo "name"', () => {
-    cy.section('consultar')
-    cy.queryMany({ index: '3' }).as('queryResult')
-
-    cy.section('salvar query')
-    cy.get('@queryResult').then(res => {
+    cy.section('consultar e salvar a query')
+    cy.findMany({ index: '3' }, options).then(res => {
       const data = JSON.stringify(res)
       cy.task('log', data)
       cy.writeFile('cypress/fixtures/query/query_many_name.json', res)
     })
+
+    // cy.section('salvar query')
+    // cy.get('@queryResult').then(res => {
+    //   const data = JSON.stringify(res)
+    //   cy.task('log', data)
+    //   cy.writeFile('cypress/fixtures/query/query_many_name.json', res)
+    // })
 
     // cy.findOne({ index: '3' }, { collection: 'types', database: 'pokemon'}).then(res => {
     //   const data = JSON.stringify(res)
