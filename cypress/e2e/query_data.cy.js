@@ -5,14 +5,17 @@ describe('consultando dados do DB', () => {
   it('[query] consulta pelo "name"', () => {
     cy.section('consultar')
     cy.findOne({ index: '3' }).then(res => {
+      const data = JSON.stringify(res)
+      cy.task('log', data)
       expect(res.name).to.eq('Venusaur')
-      expect(res).to.be.an('object')
     })
   })
 
   it('[query] consulta pelo type "water"', () => {
     cy.section('consultar')
     cy.findOne({ pokemon_type1: 'water' }).then(res => {
+      const data = JSON.stringify(res)
+      cy.task('log', data)
       expect(res.pokemon_type1).to.eq('water')
     })
   })
@@ -33,6 +36,8 @@ describe('consultando dados do DB', () => {
 
     cy.section('consultar')
     cy.findOne({ index: '348' }).then(res => {
+      const data = JSON.stringify(res)
+      cy.task('log', data)
       expect(res.pokemon_type2).to.eq('')
     })
   })

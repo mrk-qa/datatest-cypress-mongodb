@@ -6,6 +6,8 @@ describe('atualizando dados do DB', () => {
 
         cy.section('consultar')
         cy.findOne({ name: 'Shiny Kingdra' }).then(res => {
+            const data = JSON.stringify(res)
+            cy.task('log', data)
             expect(res.name).to.eq('Shiny Kingdra')
             expect(res.index).to.eq('230')
             expect(res.pokemon_type1).to.eq('water')
@@ -18,6 +20,8 @@ describe('atualizando dados do DB', () => {
 
         cy.section('consultar')
         cy.findOne({ name: 'Shiny Blastoise' }).then(res => {
+            const data = JSON.stringify(res)
+            cy.task('log', data)
             expect(res.name).to.eq('Shiny Blastoise')
         })
     })
