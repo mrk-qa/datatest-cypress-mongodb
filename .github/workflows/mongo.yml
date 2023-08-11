@@ -30,6 +30,10 @@ jobs:
           docker ps
 
       - name: Executar Testes Cypress
+        env: 
+          MONGO_URI: ${{secrets.MONGO_URI}}
+          MONGO_COLLECTION: ${{secrets.MONGO_COLLECTION}}
+          MONGO_DB: ${{secrets.MONGO_DB}}
         run: npm run cy:run
 
       - name: Parar Docker Compose
