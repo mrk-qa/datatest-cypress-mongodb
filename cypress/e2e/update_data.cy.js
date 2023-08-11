@@ -1,24 +1,24 @@
 describe('atualizando dados do DB', () => {
 
-    it('[update] atualiza o "Score", depois realiza consulta e valida se foi atualizado', () => {
+    it('[update] atualiza o "nome", depois realiza consulta e valida se foi atualizado', () => {
         cy.section('atualizar um')
-        cy.updateOne({ ProductId: 'B006K2ZZ7K' }, { $set: { Score: 11 } })
+        cy.updateOne({ name: 'Kingdra' }, { $set: { name: 'Shiny Kingdra' } })
 
         cy.section('consultar')
-        cy.findOne({ ProductId: 'B006K2ZZ7K' }).then(res => {
-            expect(res.ProductId).to.eq('B006K2ZZ7K')
-            expect(res.Score).to.eq(11)
-            expect(res).to.be.an('object')
+        cy.findOne({ name: 'Shiny Kingdra' }).then(res => {
+            expect(res.name).to.eq('Shiny Kingdra')
+            expect(res.index).to.eq('230')
+            expect(res.pokemon_type1).to.eq('water')
         })
     })
 
     it('[update] atualiza um dado, depois realiza consulta e valida se foi atualizado', () => {
         cy.section('atualizar um')
-        cy.updateOne({ Id: 8 }, { $set: { Text: 'Rosas são vermelhas violetas são azuis' } })
+        cy.updateOne({ name: 'Walking Wake' }, { $set: { name: 'Shiny Blastoise' } })
 
         cy.section('consultar')
-        cy.findOne({ Id: 8 }).then(res => {
-            expect(res.Text).to.eq('Rosas são vermelhas violetas são azuis')
+        cy.findOne({ name: 'Shiny Blastoise' }).then(res => {
+            expect(res.name).to.eq('Shiny Blastoise')
         })
     })
 })

@@ -1,7 +1,7 @@
 const { fakerPT_BR: faker } = require('@faker-js/faker')
 
 const name = faker.internet.userName().toLowerCase()
-const number = Math.floor(Math.random() * 50000)
+const number = Math.floor(Math.random() * 1000)
 
 describe('excluindo dados do DB', () => {
 
@@ -22,7 +22,8 @@ describe('excluindo dados do DB', () => {
 
     it('[delete] exclui um dado dentro da collection e do DB', () => {
         cy.section('deletar um')
-        cy.deleteOne({ Id: number }).then(res => {
+        const indexNumber = number.toString()
+        cy.deleteOne({ index: indexNumber }).then(res => {
             if (res) {
                 const data = JSON.stringify(res)
                 cy.log(data)

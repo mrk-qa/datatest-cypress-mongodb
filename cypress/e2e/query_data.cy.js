@@ -1,48 +1,45 @@
-const number = Math.floor(Math.random() * 50000)
+const number = Math.floor(Math.random() * 1000)
 
 describe('consultando dados do DB', () => {
   
-  it('[query] consulta pelo "email"', () => {
+  it('[query] consulta pelo "name"', () => {
     cy.section('consultar')
-    cy.findOne({ email: 'vilamadalena@itau.com' }, { collection: 'temproles', database: 'admin' }).then(res => {
-      expect(res.email).to.eq('vilamadalena@itau.com')
+    cy.findOne({ index: '3' }).then(res => {
+      expect(res.name).to.eq('Venusaur')
       expect(res).to.be.an('object')
-      expect(Object.keys(res).length).to.equal(5)
     })
   })
 
-  it('[query] consulta pelo "Summary"', () => {
+  it('[query] consulta pelo type "water"', () => {
     cy.section('consultar')
-    cy.findOne({ Summary: 'Great taffy' }).then(res => {
-      expect(res.Summary).to.eq('Great taffy')
-      expect(res.ProfileName).to.eq('Michael D. Bigham "M. Wassir"')
+    cy.findOne({ pokemon_type1: 'water' }).then(res => {
+      expect(res.pokemon_type1).to.eq('water')
     })
   })
 
-  it('[query] consulta um dado e exclui pelo "userId", depois realiza consulta e valida se foi excluído', () => {
+  it('[query] consulta um dado e exclui pelo "index", depois realiza consulta e valida se foi excluído', () => {
     cy.section('encontrar um e deletar')
-    cy.findOneAndDelete({ UserId: 'A395BORC6FGVXV' })
+    cy.findOneAndDelete({ index: number })
 
     cy.section('consultar')
-    cy.findOne({ UserId: 'A395BORC6FGVXV' }).then(res => {
+    cy.findOne({ index: number }).then(res => {
       expect(res).to.not.exist
     })
   })
 
-  it('[query] consulta um dado e atualiza o "ProfileName", depois realiza consulta e valida se foi atualizado', () => {
+  it('[query] consulta um dado e atualiza o "index", depois realiza consulta e valida se foi atualizado', () => {
     cy.section('encontrar um e atualizar')
-    cy.findOneAndUpdate({ ProfileName: 'Carol A. Reed' }, { $set: { ProfileName: 'Carol da Silva' } })
+    cy.findOneAndUpdate({ index: '348' }, { $set: { pokemon_type2: '' } })
 
     cy.section('consultar')
-    cy.findOne({ ProfileName: 'Carol da Silva' }).then(res => {
-      expect(res.ProfileName).to.eq('Carol da Silva')
+    cy.findOne({ index: '348' }).then(res => {
+      expect(res.pokemon_type2).to.eq('')
     })
   })
 
-  it('[query] consulta muitos dados de acordo com o "Id"', () => {
+  it('[query] consulta muitos dados de acordo com o "pokemon_type1"', () => {
     cy.section('encontra muitos')
-    cy.log(number)
-    cy.findMany({ Id: number }).then(res => {
+    cy.findMany({ pokemon_type1: 'bug' }).then(res => {
       const data = JSON.stringify(res)
       cy.log(data)
     })
