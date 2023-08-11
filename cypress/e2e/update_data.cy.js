@@ -5,7 +5,7 @@ describe('atualizando dados do DB', () => {
 
   it('[update] atualiza o "nome", depois realiza consulta e valida se foi atualizado', () => {
     cy.section('atualizar um')
-    cy.updateOne({ name: 'Kingdra' }, { $set: { name: 'Shiny Kingdra' } })
+    cy.updateOne({ name: 'Kingdra' }, { $set: { name: 'Shiny Kingdra' } }, options)
 
     cy.section('consultar e salvar query')
     cy.findMany({ name: 'Shiny Kingdra' }, options).then(res => {
@@ -23,7 +23,7 @@ describe('atualizando dados do DB', () => {
   it('[update] atualiza um dado de acordo com o "index", depois realiza consulta e valida se foi atualizado', () => {
     cy.section('atualizar um')
     const indexNumber = number.toString()
-    cy.updateOne({ index: indexNumber }, { $set: { name: 'Shiny Blastoise' } })
+    cy.updateOne({ index: indexNumber }, { $set: { name: 'Shiny Blastoise' } }, options)
 
     cy.section('consultar e salvar query')
     cy.findMany({ index: indexNumber }, options).then(res => {
