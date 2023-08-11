@@ -18,10 +18,8 @@ jobs:
       - name: Instalar Dependências
         run: npm install
 
-      - name: Docker Compose
-        uses: KengoTODA/actions-setup-docker-compose@v1
-        with:
-          version: '3.8' # the full version of `docker-compose` command
+      - name: Set up Docker
+        uses: docker/setup-qemu-action@v2
 
       - name: Iniciar Banco de Dados MongoDB usando Docker Compose
         run: docker-compose up -d
