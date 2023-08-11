@@ -59,7 +59,7 @@ describe('consultando dados do DB', () => {
 
   it('[query] consulta muitos dados de acordo com o "pokemon_type1"', () => {
     cy.section('consultar e salvar query')
-    cy.findMany({ pokemon_type1: 'bug' }, options).then(res => {
+    cy.findMany({ pokemon_type1: 'rock' }, options).then(res => {
       cy.writeFile('cypress/fixtures/query/query_many_pokemon_type1.json', res)
     })
 
@@ -67,7 +67,7 @@ describe('consultando dados do DB', () => {
     cy.fixture('query/query_many_pokemon_type1.json').then(res => {
       const data = JSON.stringify(res)
       cy.task('log', data)
-      expect(res[0].pokemon_type1).to.equal('bug')
+      expect(res[0].pokemon_type1).to.equal('rock')
     })
   })
 
