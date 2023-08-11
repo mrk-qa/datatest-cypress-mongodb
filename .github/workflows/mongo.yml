@@ -32,16 +32,12 @@ jobs:
       - name: Import Data into MongoDB
         run: node cypress/mongodb/import.js
 
-      - name: Cypress run
-        uses: cypress-io/github-action@v5
-        env:
+      - name: Run Cypress Tests
+        env: 
           MONGO_URI: ${{secrets.MONGO_URI}}
           MONGO_COLLECTION: ${{secrets.MONGO_COLLECTION}}
           MONGO_DB: ${{secrets.MONGO_DB}}
-          CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
-        with:
-          start: npm cy:run
-          record: true
+        run: npx cypress run --record --key ${{secrets.CYPRESS_RECORD_KEY}}
 
       - name: Stop Docker Compose
         run: docker-compose down
