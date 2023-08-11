@@ -41,7 +41,7 @@ describe('consultando dados do DB', () => {
     cy.section('encontra muitos')
     cy.findMany({ pokemon_type1: 'bug' }).then(res => {
       const data = JSON.stringify(res)
-      cy.log(data)
+      cy.task('log', data)
     })
   })
 

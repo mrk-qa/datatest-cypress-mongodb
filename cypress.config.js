@@ -17,6 +17,12 @@ module.exports = defineConfig({
     screenshotOnRunFailure: false,
     setupNodeEvents(on, config) {
       mongo.configurePlugin(on);
+      on('task', {
+        log(message) {
+          console.log(message)
+          return null
+        },
+      })
     },
   },
 })

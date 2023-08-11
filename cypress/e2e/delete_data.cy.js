@@ -10,13 +10,13 @@ describe('excluindo dados do DB', () => {
         cy.section('setup')
         cy.createCollection(name, { database: 'test' }).then(res => {
             const data = JSON.stringify(res)
-            cy.log(data)
+            cy.task('log', data)
         })
 
         cy.section('derrubar')
         cy.dropCollection(name, { database: 'test' }).then(res => {
             const data = JSON.stringify(res)
-            cy.log(data)
+            cy.task('log', data)
         })
     })
 
@@ -26,7 +26,7 @@ describe('excluindo dados do DB', () => {
         cy.deleteOne({ index: indexNumber }).then(res => {
             if (res) {
                 const data = JSON.stringify(res)
-                cy.log(data)
+                cy.task('log', data)
             } else {
                 throw new Error('Não há dados para excluir')
             }
