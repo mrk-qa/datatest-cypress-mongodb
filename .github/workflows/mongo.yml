@@ -37,7 +37,10 @@ jobs:
           MONGO_URI: ${{secrets.MONGO_URI}}
           MONGO_COLLECTION: ${{secrets.MONGO_COLLECTION}}
           MONGO_DB: ${{secrets.MONGO_DB}}
-        run: npx cypress run --record --key ${{secrets.CYPRESS_RECORD_KEY}}
+        run: |
+          ls cypress/fixtures/query
+          npx cypress run --record --key ${{secrets.CYPRESS_RECORD_KEY}}
+          ls cypress/fixtures/query
 
       - name: Stop Docker Compose
         run: docker-compose down
