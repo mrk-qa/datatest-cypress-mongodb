@@ -12,7 +12,7 @@ describe('consultando dados do DB', () => {
     cy.section('dados esperados')
     cy.fixture('query/query_many_name.json').then(res => {
       const data = JSON.stringify(res)
-      cy.task('log', data)
+      console.log(data)
       expect(res[0].name).to.eq('Venusaur')
     })
   })
@@ -25,8 +25,6 @@ describe('consultando dados do DB', () => {
 
     cy.section('dados esperados')
     cy.fixture('query/query_many_type_water.json').then(res => {
-      const data = JSON.stringify(res[0].pokemon_type1)
-      cy.task('log', data)
       expect(res[0].pokemon_type1).to.equal('water')
     })
   })
@@ -55,15 +53,13 @@ describe('consultando dados do DB', () => {
 
     cy.section('dados esperados')
     cy.fixture('query/query_many_index_and_update_pokemon_type2.json').then(res => {
-      const data = JSON.stringify(res[0].pokemon_type2)
-      cy.task('log', data)
       expect(res[0].pokemon_type2).to.equal('')
     })
   })
 
   it('[query] consulta muitos dados de acordo com o "pokemon_type1"', () => {
     cy.section('consultar e salvar query')
-    cy.queryMany({ pokemon_type1: 'bug' }, options).then(res => {
+    cy.findMany({ pokemon_type1: 'bug' }, options).then(res => {
       cy.writeFile('cypress/fixtures/query/query_many_pokemon_type1.json', res)
     })
 
