@@ -12,6 +12,16 @@ describe('consultando dados do DB', () => {
       cy.writeFile('cypress/fixtures/query/query_many_name.json', result)
     })
 
+    cy.findOne({ index: '3' }).then(res => {
+      const data = JSON.stringify(res)
+      cy.task('log', data)
+    })
+
+    cy.findMany({ index: '3' }).then(res => {
+      const data = JSON.stringify(res)
+      cy.task('log', data)
+    })
+
     cy.section('dados esperados')
     cy.readFile('cypress//fixtures//query//query_many_name.json').then(result => {
       cy.log(result)
