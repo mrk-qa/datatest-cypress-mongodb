@@ -3,9 +3,9 @@ const MongoClient = require('mongodb').MongoClient
 const csv = require('csv-parser')
 require('dotenv').config()
 
-const uri = process.env.MONGO_URI
-const dbName = process.env.MONGO_DB
-const collectionName = process.env.MONGO_COLLECTION
+const uri = 'mongodb://mrk-qa:admin@localhost:27017/?authMechanism=DEFAULT'
+const dbName = 'pokemon'
+const collectionName = 'types'
 
 const filePath = 'cypress/fixtures/pokemon.csv'
 
