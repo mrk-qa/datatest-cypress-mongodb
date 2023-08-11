@@ -32,8 +32,9 @@ async function importCSVToMongoDB() {
       const result = await collection.insertMany(documents)
       console.log(`${result.insertedCount} documentos foram inseridos na coleção ${collectionName}`)
 
+      console.log('------------------------------------------------------------------------------------')
       const query = { name: 'Seaking' }
-      console.log('Realizando consulta com a query:', query)
+      console.log('Realizando consulta de teste ao MongoDB com a query:', query)
       const resultQuery = await collection.findOne(query)
       console.log('Resultado da consulta:', resultQuery)
 
