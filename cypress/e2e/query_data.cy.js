@@ -1,4 +1,3 @@
-const assert = require('assert')
 const number = Math.floor(Math.random() * 1000)
 
 describe('consultando dados do DB', () => {
@@ -12,13 +11,17 @@ describe('consultando dados do DB', () => {
     })
   })
 
-  it('[query] consulta pelo type "water"', () => {
+  it.only('[query] consulta pelo type "water"', () => {
     cy.section('consultar')
-    cy.findOne({ pokemon_type1: 'water' }).then(res => {
-      const data = JSON.stringify(res)
-      cy.task('log', res.pokemon_type1)
+    cy.findOne({ pokemon_type1: 'water' }).then(query => {
+      cy.writeFile('cypress/fixtures/query/query_water.json', query)
+    })
 
-      assert.strictEqual(res.pokemon_type1, 'water')
+    cy.section('dados esperados')
+    cy.fixture('query/query_water.json').then(res => {
+      const data = JSON.stringify(res.pokemon_type1)
+      cy.task('log', data)
+      expect(res.pokemon_type1).to.equal('water')
     })
   })
 
