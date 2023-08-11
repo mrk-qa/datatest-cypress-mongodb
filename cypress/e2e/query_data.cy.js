@@ -1,3 +1,4 @@
+const assert = require('assert')
 const number = Math.floor(Math.random() * 1000)
 
 describe('consultando dados do DB', () => {
@@ -15,8 +16,9 @@ describe('consultando dados do DB', () => {
     cy.section('consultar')
     cy.findOne({ pokemon_type1: 'water' }).then(res => {
       const data = JSON.stringify(res)
-      cy.task('log', data)
-      expect(res.pokemon_type1).to.eq('water')
+      cy.task('log', res.pokemon_type1)
+
+      assert.strictEqual(res.pokemon_type1, 'water')
     })
   })
 
