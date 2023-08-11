@@ -1,4 +1,4 @@
-name: Pipeline de Testes com Docker Compose e Cypress
+name: Test Pipeline with Docker Compose and Cypress
 
 on: [push]
 
@@ -7,34 +7,37 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout do Código
+      - name: Checkout Code
         uses: actions/checkout@v3
 
-      - name: Configurar Node.js
+      - name: Setup Node.js
         uses: actions/setup-node@v2
         with:
           node-version: 16
 
-      - name: Instalar Dependências
+      - name: Install Dependencies
         run: npm install
 
       - name: Set up Docker
         uses: docker/setup-qemu-action@v2
 
-      - name: Iniciar Banco de Dados MongoDB usando Docker Compose
+      - name: Start MongoDB Database using Docker Compose
         run: docker-compose up -d
 
-      - name: Aguardar Inicialização do MongoDB
+      - name: Wait for MongoDB to Initialize
         run: |
           sleep 10
           docker ps
 
-      - name: Executar Testes Cypress
+      - name: Import Data into MongoDB
+        run: node cypress/mongodb/import.js
+
+      - name: Run Cypress Tests
         env: 
           MONGO_URI: ${{secrets.MONGO_URI}}
           MONGO_COLLECTION: ${{secrets.MONGO_COLLECTION}}
           MONGO_DB: ${{secrets.MONGO_DB}}
         run: npm run cy:run
 
-      - name: Parar Docker Compose
+      - name: Stop Docker Compose
         run: docker-compose down
