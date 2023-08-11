@@ -13,8 +13,10 @@ describe('consultando dados do DB', () => {
 
   it.only('[query] consulta pelo type "water"', () => {
     cy.section('consultar')
-    cy.findOne({ pokemon_type1: 'water' }).then(query => {
-      cy.writeFile('cypress/fixtures/query/query_water.json', query)
+    cy.findOne({ pokemon_type1: 'water' }).then(result => {
+      const data = JSON.stringify(result.pokemon_type1)
+      cy.task('log', data)
+      cy.writeFile('cypress/fixtures/query/query_water.json', result)
     })
 
     cy.section('dados esperados')
