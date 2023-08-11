@@ -25,34 +25,46 @@ describe('criando dados ao DB', () => {
         })
 
         cy.findOne({email: email}, { collection: 'temproles', database: 'admin'}).then(res => {
+            const data = JSON.stringify(res)
+            cy.task('log', data)
             expect(res.email).to.eq(email)
         })
     })
 
     it('[create] inserir muitos dados separadamente', () => {
         cy.insertMany([{nome: name }, {telefone: '(11) 99999-9999'}, { email: email }], { collection: 'temproles', database: 'admin'}).then(res => {
-            cy.task('log', res)
+            const data = JSON.stringify(res)
+            cy.task('log', data)
         })
 
         cy.findOne({nome: name }, { collection: 'temproles', database: 'admin'}).then(res => {
+            const data = JSON.stringify(res)
+            cy.task('log', data)
             expect(res.nome).to.eq(name)
         })
 
         cy.findOne({telefone: '(11) 99999-9999'}, { collection: 'temproles', database: 'admin'}).then(res => {
+            const data = JSON.stringify(res)
+            cy.task('log', data)
             expect(res.telefone).to.eq('(11) 99999-9999')
         })
 
         cy.findOne({ email: email }, { collection: 'temproles', database: 'admin'}).then(res => {
+            const data = JSON.stringify(res)
+            cy.task('log', data)
             expect(res.email).to.eq(email)
         })
     })
 
     it('[create] inserir muitos dados em conjunto', () => {
         cy.insertMany([{nome: name, endereco: { logradouro: 'Rua Fradique Coutinho, 987', bairro: 'Jardim Eliza Maria', cidade: 'São Paulo', estado: 'SP', cep: '02874-000' }, telefone: '(11) 99999-9999', email: email }], { collection: 'temproles', database: 'admin'}).then(res => {
-            cy.task('log', res)
+            const data = JSON.stringify(res)
+            cy.task('log', data)
         })
 
         cy.findOne({ email: email }, { collection: 'temproles', database: 'admin'}).then(res => {
+            const data = JSON.stringify(res)
+            cy.task('log', data)
             expect(res.email).to.eq(email)
         })
     })
