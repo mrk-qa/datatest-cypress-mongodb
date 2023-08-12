@@ -21,17 +21,13 @@ jobs:
       - name: Set up Docker
         uses: docker/setup-qemu-action@v2
 
-      - name: Start MongoDB
-        uses: supercharge/mongodb-github-action@1.6.0
-        with:
-          mongodb-version: '4.0'
-          mongodb-root-username: ${{ secrets.USERNAME }}
-          mongodb-root-password: ${{ secrets.PASSWORD }}
+      - name: Start MongoDB Database using Docker Compose
+        run: docker-compose up -d
 
-      # - name: Wait for MongoDB to Initialize
-      #   run: |
-      #     sleep 10
-      #     docker ps
+      - name: Wait for MongoDB to Initialize
+        run: |
+          sleep 10
+          docker ps
 
       - name: Import Data into MongoDB
         run: node cypress/mongodb/import.js
