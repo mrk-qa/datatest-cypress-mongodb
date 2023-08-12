@@ -1,6 +1,10 @@
 name: Test Pipeline with Docker Compose and Cypress
 
-on: [push]
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
 
 jobs:
   test:
