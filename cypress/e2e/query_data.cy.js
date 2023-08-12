@@ -1,4 +1,5 @@
 const number = Math.floor(Math.random() * 1000)
+
 const options = { collection: 'types', database: 'pokemon' }
 
 describe('consultando dados do DB', () => {
@@ -41,5 +42,4 @@ describe('consultando dados do DB', () => {
       expect(res).to.not.exist
     })
   })
-
 })

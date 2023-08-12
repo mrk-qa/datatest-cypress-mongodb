@@ -2,6 +2,7 @@ const { fakerPT_BR: faker } = require('@faker-js/faker')
 
 const name = faker.internet.userName().toLowerCase()
 const number = Math.floor(Math.random() * 1000)
+
 const options = { collection: 'types', database: 'pokemon' }
 
 describe('excluindo dados do DB', () => {
