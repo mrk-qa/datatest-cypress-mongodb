@@ -47,23 +47,15 @@ jobs:
           MONGO_COLLECTION: ${{secrets.MONGO_COLLECTION}}
           MONGO_DB: ${{secrets.MONGO_DB}}
 
-      - name: Get Allure history
-        uses: actions/checkout@v3
-        if: always()
-        continue-on-error: true
-        with:
-          ref: gh-pages
-          path: gh-pages
-
-      - name: Generate Allure report
+      - name: Test marketplace action
         uses: simple-elf/allure-report-action@master
         if: always()
+        id: allure-report
         with:
-          allure_results: reports/allure-results
+          allure_results: cypress/reports/allure-results
           gh_pages: gh-pages
           allure_report: allure-report
           allure_history: allure-history
-          keep_reports: 30
 
       - name: Deploy report to Github Pages
         if: always()
