@@ -15,6 +15,9 @@ describe('Atualizando dados do DB', () => {
 
     cy.section('dados esperados')
     cy.fixture('query/query_many_name_and_update_name.json').then(res => {
+      const data = JSON.stringify(res)
+      cy.task('log', data)
+
       cy.wrap(res[0].name).should('contains', 'Shiny Kingdra')
       cy.wrap(res[0].pokemon_type1).should('contains', 'water')
       cy.wrap(res[0].index).should('contains', '230')
@@ -33,6 +36,9 @@ describe('Atualizando dados do DB', () => {
 
     cy.section('dados esperados')
     cy.fixture('query/query_many_index_and_update_name.json').then(res => {
+      const data = JSON.stringify(res)
+      cy.task('log', data)
+      
       cy.wrap(res[0].name).should('contains', 'Shiny Blastoise')
     })
   })

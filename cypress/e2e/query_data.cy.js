@@ -14,6 +14,7 @@ describe('Consultando dados do DB', () => {
     cy.fixture('query/query_many_name.json').then(res => {
       const data = JSON.stringify(res)
       cy.task('log', data)
+
       cy.wrap(res[0].name).should('contains', 'Venusaur')
     })
   })
@@ -26,6 +27,9 @@ describe('Consultando dados do DB', () => {
 
     cy.section('dados esperados')
     cy.fixture('query/query_many_type_water.json').then(res => {
+      const data = JSON.stringify(res)
+      cy.task('log', data)
+
       cy.wrap(res[0].pokemon_type1).should('contains', 'water')
     })
   })
@@ -39,6 +43,9 @@ describe('Consultando dados do DB', () => {
     cy.section('consultar')
     
     cy.findOne({ index: indexNumber }, options).then(res => {
+      const data = JSON.stringify(res)
+      cy.task('log', data)
+
       cy.wrap(res).should('not.exist')
     })
   })
@@ -51,6 +58,9 @@ describe('Consultando dados do DB', () => {
 
     cy.section('dados esperados')
     cy.fixture('query/query_many_null_pokemon_type2.json').then(res => {
+      const data = JSON.stringify(res)
+      cy.task('log', data)
+
       cy.wrap(res[15].pokemon_type2).should('contains', '')
       console.log('Quantidade de dados da query: ' + res.length)
     })
@@ -64,6 +74,9 @@ describe('Consultando dados do DB', () => {
 
     cy.section('dados esperados')
     cy.fixture('query/query_many_unknown_pokemon_type1.json').then(res => {
+      const data = JSON.stringify(res)
+      cy.task('log', data)
+
       cy.wrap(res[1].pokemon_type1).should('contains', 'unknown')
       cy.wrap(res).should('have.length', 5)
       console.log('Quantidade de dados da query: ' + res.length)
@@ -78,6 +91,9 @@ describe('Consultando dados do DB', () => {
 
     cy.section('dados esperados')
     cy.fixture('query/query_many_null_index.json').then(res => {
+      const data = JSON.stringify(res)
+      cy.task('log', data)
+      
       cy.wrap(res[1].index).should('contains', '')
       cy.wrap(res).should('have.length', 5)
     })
