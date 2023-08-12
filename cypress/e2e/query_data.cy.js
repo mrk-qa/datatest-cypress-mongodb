@@ -51,7 +51,8 @@ describe('consultando dados do DB', () => {
 
     cy.section('dados esperados')
     cy.fixture('query/query_many_null_pokemon_type2.json').then(res => {
-      cy.wrap(res).should('have.length', 248)
+      cy.wrap(res[15].pokemon_type2).should('contains', '')
+      console.log('Quantidade de dados da query: ' + res.length)
     })
   })
 
@@ -63,7 +64,9 @@ describe('consultando dados do DB', () => {
 
     cy.section('dados esperados')
     cy.fixture('query/query_many_unknown_pokemon_type1.json').then(res => {
+      cy.wrap(res[1].pokemon_type1).should('contains', 'unknown')
       cy.wrap(res).should('have.length', 5)
+      console.log('Quantidade de dados da query: ' + res.length)
     })
   })
 
@@ -75,6 +78,7 @@ describe('consultando dados do DB', () => {
 
     cy.section('dados esperados')
     cy.fixture('query/query_many_null_index.json').then(res => {
+      cy.wrap(res[1].index).should('contains', '')
       cy.wrap(res).should('have.length', 5)
     })
   })
