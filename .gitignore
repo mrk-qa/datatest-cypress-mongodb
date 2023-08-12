@@ -3,3 +3,4 @@
 /screenshots
 /videos
 cypress/fixtures/query
+cypress/reports/
