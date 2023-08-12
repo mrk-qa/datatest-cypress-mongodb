@@ -1,14 +1,13 @@
-const { defineConfig } = require("cypress");
-const mongo = require('cypress-mongodb');
-require('dotenv').config()
+const { defineConfig } = require("cypress")
+const mongo = require('cypress-mongodb')
 
 module.exports = defineConfig({
   projectId: 'eamhmz',
   env: {
     mongodb: {
-      uri: process.env.MONGO_URI,
-      collection: process.env.MONGO_COLLECTION,
-      database: process.env.MONGO_DB,
+      uri: 'mongodb://mrk-qa:admin@localhost:27017/?authMechanism=DEFAULT',
+      collection: 'types',
+      database: 'pokemon',
     },
   },
   e2e: {

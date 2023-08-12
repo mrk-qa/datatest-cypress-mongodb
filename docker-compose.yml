@@ -1,4 +1,5 @@
 version: '3.8'
+
 services:
   mongodb:
     image: mongo:latest
@@ -10,5 +11,6 @@ services:
     environment:
       MONGO_INITDB_ROOT_USERNAME: mrk-qa
       MONGO_INITDB_ROOT_PASSWORD: admin
+      
 volumes:
   mongodb_data:
