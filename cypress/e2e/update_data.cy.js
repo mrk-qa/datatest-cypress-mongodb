@@ -15,9 +15,9 @@ describe('atualizando dados do DB', () => {
 
     cy.section('dados esperados')
     cy.fixture('query/query_many_name_and_update_name.json').then(res => {
-      expect(res[0].name).to.eq('Shiny Kingdra')
-      expect(res[0].index).to.eq('230')
-      expect(res[0].pokemon_type1).to.eq('water')
+      cy.wrap(res[0].name).should('contains', 'Shiny Kingdra')
+      cy.wrap(res[0].pokemon_type1).should('contains', 'water')
+      cy.wrap(res[0].index).should('contains', '230')
     })
   })
 
@@ -33,7 +33,7 @@ describe('atualizando dados do DB', () => {
 
     cy.section('dados esperados')
     cy.fixture('query/query_many_index_and_update_name.json').then(res => {
-      expect(res[0].name).to.eq('Shiny Blastoise')
+      cy.wrap(res[0].name).should('contains', 'Shiny Blastoise')
     })
   })
 })

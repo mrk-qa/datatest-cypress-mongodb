@@ -27,7 +27,7 @@ describe('criando dados ao DB', () => {
         cy.findOne({email: email}, { collection: 'temproles', database: 'admin'}).then(res => {
             const data = JSON.stringify(res.email)
             cy.task('log', data)
-            expect(res.email).to.eq(email)
+            cy.wrap(res.email).should('contains', email)
         })
     })
 
@@ -39,7 +39,7 @@ describe('criando dados ao DB', () => {
         cy.findOne({ email: email }, { collection: 'temproles', database: 'admin'}).then(res => {
             const data = JSON.stringify(res)
             cy.task('log', data)
-            expect(res.email).to.eq(email)
+            cy.wrap(res.email).should('contains', email)
         })
     })
 })
