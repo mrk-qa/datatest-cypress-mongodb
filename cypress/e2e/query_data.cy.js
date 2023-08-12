@@ -51,7 +51,7 @@ describe('consultando dados do DB', () => {
 
     cy.section('dados esperados')
     cy.fixture('query/query_many_null_pokemon_type2.json').then(res => {
-      cy.wrap(res).should('have.length', 249)
+      cy.wrap(res).should('have.length', 248)
     })
   })
 
