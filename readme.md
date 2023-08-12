@@ -1,4 +1,4 @@
-# POC - DATATEST com Cypress + MongoDB 💚
+# Data Test com Cypress + MongoDB 💚
 
 <h1 align="center">
     <img width="300px" src="https://github.com/mrk-qa/datatest-cypress-mongodb/assets/102618854/f6ba2d80-4a5f-45b9-a914-8857c488e846" alt="2560px-NTT-Data-Logo">
