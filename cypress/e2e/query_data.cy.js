@@ -12,7 +12,8 @@ describe('Consultando dados do DB', () => {
 
     cy.section('dados esperados')
     cy.fixture('query/query_many_name.json').then(res => {
-      cy.log(res)
+      const data = JSON.stringify(res)
+      cy.task('log', data)
       cy.wrap(res[0].name).should('contains', 'Venusaur')
     })
   })
@@ -69,7 +70,7 @@ describe('Consultando dados do DB', () => {
     })
   })
 
-  it('[query] consulta a quantidade de dados "vazios" na coluna "index"', () => {
+  it('[query] consulta a quantidade de dados "nulos" na coluna "index"', () => {
     cy.section('consultar e salvar a query')
     cy.findMany({$or: [{ index: { $exists: false } }, { index: '' }]}, options).then(res => {
       cy.writeFile('cypress/fixtures/query/query_many_null_index.json', res)
