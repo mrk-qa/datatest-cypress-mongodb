@@ -47,7 +47,7 @@ jobs:
           MONGO_COLLECTION: ${{secrets.MONGO_COLLECTION}}
           MONGO_DB: ${{secrets.MONGO_DB}}
 
-      - name: Test marketplace action
+      - name: Generate report
         uses: simple-elf/allure-report-action@master
         if: always()
         id: allure-report
