@@ -47,6 +47,18 @@ jobs:
           MONGO_COLLECTION: ${{secrets.MONGO_COLLECTION}}
           MONGO_DB: ${{secrets.MONGO_DB}}
 
+      - name: Insert information to report
+        run: |
+          sh scripts/trendreports.sh
+
+      - name: Get Allure history
+        uses: actions/checkout@v3
+        if: always()
+        continue-on-error: true
+        with:
+          ref: gh-pages
+          path: gh-pages
+
       - name: Generate report
         uses: simple-elf/allure-report-action@master
         if: always()
