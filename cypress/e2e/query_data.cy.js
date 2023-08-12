@@ -12,8 +12,7 @@ describe('Consultando dados do DB', () => {
 
     cy.section('dados esperados')
     cy.fixture('query/query_many_name.json').then(res => {
-      const data = JSON.stringify(res)
-      console.log(data)
+      cy.log(res)
       cy.wrap(res[0].name).should('contains', 'Venusaur')
     })
   })
@@ -43,7 +42,7 @@ describe('Consultando dados do DB', () => {
     })
   })
 
-  it('[query] consulta a quantidade de dados "vazios" na coluna "pokemon_type2"', () => {
+  it('[query] consulta a quantidade de dados "nulos" na coluna "pokemon_type2"', () => {
     cy.section('consultar e salvar a query')
     cy.findMany({$or: [{ pokemon_type2: { $exists: false } }, { pokemon_type2: '' }]}, options).then(res => {
       cy.writeFile('cypress/fixtures/query/query_many_null_pokemon_type2.json', res)
