@@ -5,7 +5,7 @@ const number = Math.floor(Math.random() * 1000)
 
 const options = { collection: 'types', database: 'pokemon' }
 
-describe('excluindo dados do DB', () => {
+describe('Excluindo dados do DB', () => {
 
     it('[delete] derruba uma collection', () => {
 

@@ -2,7 +2,7 @@ const number = Math.floor(Math.random() * 1000)
 
 const options = { collection: 'types', database: 'pokemon' }
 
-describe('atualizando dados do DB', () => {
+describe('Atualizando dados do DB', () => {
 
   it('[update] atualiza o "nome", depois realiza consulta e valida se foi atualizado', () => {
     cy.section('atualizar um')

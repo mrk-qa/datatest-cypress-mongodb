@@ -2,7 +2,7 @@ const number = Math.floor(Math.random() * 1000)
 
 const options = { collection: 'types', database: 'pokemon' }
 
-describe('consultando dados do DB', () => {
+describe('Consultando dados do DB', () => {
   
   it('[query] consulta pelo "name"', () => {
     cy.section('consultar e salvar a query')

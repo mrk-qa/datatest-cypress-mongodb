@@ -3,7 +3,7 @@ const { fakerPT_BR: faker } = require('@faker-js/faker')
 const name = faker.internet.userName().toLowerCase()
 const email = faker.internet.email().toLowerCase()
 
-describe('criando dados ao DB', () => {
+describe('Criando dados ao DB', () => {
 
     it('[create] cria uma collection', () => {
         cy.section('criar')
