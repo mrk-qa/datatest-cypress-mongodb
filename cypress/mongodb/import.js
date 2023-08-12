@@ -1,9 +1,9 @@
 const fs = require('fs')
 const MongoClient = require('mongodb').MongoClient
 const csv = require('csv-parser')
-require('dotenv').config()
+require('dotenv').config({path: '.env'})
 
-const uri = 'mongodb://mrk-qa:admin@localhost:27017/?authMechanism=DEFAULT'
+const uri = process.env.MONGO_URI
 const dbName = 'pokemon'
 const collectionName = 'types'
 
