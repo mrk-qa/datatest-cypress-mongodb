@@ -22,7 +22,7 @@ jobs:
       - name: Install Dependencies
         run: npm install
 
-      - name: Set up Docker
+      - name: Setup Docker
         uses: docker/setup-qemu-action@v2
 
       - name: Start MongoDB Database using Docker Compose
