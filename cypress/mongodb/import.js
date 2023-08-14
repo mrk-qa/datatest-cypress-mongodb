@@ -3,9 +3,6 @@ const MongoClient = require('mongodb').MongoClient
 const csv = require('csv-parser')
 
 const uri = 'mongodb://mrk-qa:admin@localhost:27017/?authMechanism=DEFAULT'
-const dbName = 'pokemon'
-const collectionName = 'types'
-
 const filePath = 'cypress/fixtures/pokemon.csv'
 
 async function importCSVToMongoDB() {
@@ -15,8 +12,8 @@ async function importCSVToMongoDB() {
 
     console.log('Conectado ao MongoDB')
 
-    const db = client.db(dbName)
-    const collection = db.collection(collectionName)
+    const db = client.db('pokemon')
+    const collection = db.collection('types')
 
     const stream = fs.createReadStream(filePath)
       .pipe(csv())
@@ -29,7 +26,7 @@ async function importCSVToMongoDB() {
 
     stream.on('end', async () => {
       const result = await collection.insertMany(documents)
-      console.log(`${result.insertedCount} documentos foram inseridos na coleção ${collectionName}`)
+      console.log(`${result.insertedCount} documentos foram inseridos na coleção 'types'`)
 
       console.log('------------------------------------------------------------------------------------')
       const query = { name: 'Seaking' }
