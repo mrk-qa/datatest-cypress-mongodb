@@ -36,6 +36,9 @@ jobs:
       - name: Import Data into MongoDB
         run: node cypress/mongodb/import.js
 
+      - name: Migrate Data from one Database to another Database
+        run: node cypress/mongodb/migration.js
+
       - name: Run Cypress Tests
         uses: cypress-io/github-action@v5
         continue-on-error: true
