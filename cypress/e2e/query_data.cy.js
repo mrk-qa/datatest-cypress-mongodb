@@ -6,7 +6,7 @@ describe('Consultando dados do DB', () => {
   it('[query] consulta pelo "name"', () => {
     cy.allure().severity('trivial')
 
-    cy.findMany({ index: '3' }, options).then(res => {
+    cy.findMany({ name: 'Venusaur' }, options).then(res => {
       const data = JSON.stringify(res)
       cy.task('log', data)
 
