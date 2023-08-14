@@ -3,6 +3,8 @@ const options = { collection: 'types', database: 'pokemon'}
 describe('Performance dos dados ao DB', () => {
 
   it('[performance] tempo de resposta de uma query em ms', () => {
+    cy.allure().severity('blocker')
+
     const startTime = Date.now()
 
     cy.wrap(new Promise((resolve) => {

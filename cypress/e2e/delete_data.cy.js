@@ -7,6 +7,8 @@ const number = Math.floor(Math.random() * 1000)
 describe('Excluindo dados do DB', () => {
 
   it('[delete] derruba uma collection', () => {
+    cy.allure().severity('trivial')
+
     cy.createCollection(name, { database: 'test' }).then(res => {
       const data = JSON.stringify(res)
       cy.task('log', data)
@@ -19,6 +21,8 @@ describe('Excluindo dados do DB', () => {
   })
 
   it('[delete] exclui um dado dentro da collection e do DB', () => {
+    cy.allure().severity('minor')
+    
     const indexNumber = number.toString()
     cy.deleteOne({ index: indexNumber }, options).then(res => {
       if (res) {

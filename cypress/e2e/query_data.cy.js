@@ -4,6 +4,8 @@ const options = { collection: 'types', database: 'pokemon'}
 describe('Consultando dados do DB', () => {
   
   it('[query] consulta pelo "name"', () => {
+    cy.allure().severity('trivial')
+
     cy.findMany({ index: '3' }, options).then(res => {
       const data = JSON.stringify(res)
       cy.task('log', data)
@@ -13,6 +15,8 @@ describe('Consultando dados do DB', () => {
   })
 
   it('[query] consulta pelo type "water"', () => {
+    cy.allure().severity('trivial')
+
     cy.findMany({ pokemon_type1: 'water' }, options).then(res => {
       const data = JSON.stringify(res)
       cy.task('log', data)
@@ -22,6 +26,8 @@ describe('Consultando dados do DB', () => {
   })
 
   it('[query] consulta um dado e exclui pelo "index", depois realiza consulta e valida se foi excluído', () => {
+    cy.allure().severity('critical')
+
     const indexNumber = number.toString()
 
     cy.findOneAndDelete({ index: indexNumber }, options).then(res => {
@@ -37,6 +43,8 @@ describe('Consultando dados do DB', () => {
   })
 
   it('[query] consulta a quantidade de dados "nulos" na coluna "pokemon_type2"', () => {
+    cy.allure().severity('critical')
+
     cy.findMany({$or: [{ pokemon_type2: { $exists: false } }, { pokemon_type2: '' }]}, options).then(res => {
       const data = JSON.stringify(res)
       cy.task('log', data)
@@ -47,6 +55,8 @@ describe('Consultando dados do DB', () => {
   })
 
   it('[query] consulta a quantidade de dados "unknown" na coluna "pokemon_type1"', () => {
+    cy.allure().severity('critical')
+
     cy.findMany({$or: [{ pokemon_type1: { $exists: false } }, { pokemon_type1: 'unknown' }]}, options).then(res => {
       const data = JSON.stringify(res)
       cy.task('log', data)
@@ -58,6 +68,8 @@ describe('Consultando dados do DB', () => {
   })
 
   it('[query] consulta a quantidade de dados "nulos" na coluna "index"', () => {
+    cy.allure().severity('critical')
+    
     cy.findMany({$or: [{ index: { $exists: false } }, { index: '' }]}, options).then(res => {
       const data = JSON.stringify(res)
       cy.task('log', data)

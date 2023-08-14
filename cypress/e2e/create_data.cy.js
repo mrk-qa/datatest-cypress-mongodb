@@ -6,6 +6,8 @@ const email = faker.internet.email().toLowerCase()
 describe('Criando dados ao DB', () => {
 
   it('[create] cria uma collection', () => {
+    cy.allure().severity('trivial')
+
     cy.createCollection(name, { database: 'test' }).then(res => {
       const data = JSON.stringify(res)
       cy.task('log', data)
@@ -18,6 +20,8 @@ describe('Criando dados ao DB', () => {
   })
 
   it('[create] inserir um dado do tipo email', () => {
+    cy.allure().severity('normal')
+
     cy.insertOne({ email: email }, { collection: 'temproles', database: 'admin' }).then(res => {
       cy.task('log', `Dado inserido com sucesso! ObjectId('${res}') `)
     })
@@ -31,6 +35,8 @@ describe('Criando dados ao DB', () => {
   })
 
   it('[create] inserir muitos dados em conjunto', () => {
+    cy.allure().severity('normal')
+    
     cy.insertMany([{ nome: name, endereco: { logradouro: 'Rua Fradique Coutinho, 987', bairro: 'Jardim Eliza Maria', cidade: 'São Paulo', estado: 'SP', cep: '02874-000' }, telefone: '(11) 99999-9999', email: email }], { collection: 'temproles', database: 'admin' }).then(res => {
       const data = JSON.stringify(res)
       cy.task('log', data)

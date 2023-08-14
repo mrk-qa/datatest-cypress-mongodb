@@ -4,6 +4,8 @@ const options = { collection: 'types', database: 'pokemon'}
 describe('Atualizando dados do DB', () => {
 
   it('[update] atualiza o "nome", depois realiza consulta e valida se foi atualizado', () => {
+    cy.allure().severity('critical')
+
     cy.updateOne({ name: 'Kingdra' }, { $set: { name: 'Shiny Kingdra' } }, options).then(res => {
       const data = JSON.stringify(res)
       cy.task('log', data)
@@ -20,6 +22,8 @@ describe('Atualizando dados do DB', () => {
   })
 
   it('[update] atualiza um dado de acordo com o "index", depois realiza consulta e valida se foi atualizado', () => {
+    cy.allure().severity('critical')
+    
     const indexNumber = number.toString()
     cy.updateOne({ index: indexNumber }, { $set: { name: 'Shiny Blastoise' } }, options).then(res => {
       const data = JSON.stringify(res)
