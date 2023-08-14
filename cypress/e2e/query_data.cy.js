@@ -1,101 +1,70 @@
 const number = Math.floor(Math.random() * 1000)
 
-const options = { collection: 'types', database: 'pokemon' }
+const options = { collection: Cypress.env('mongodb').collection, database: Cypress.env('mongodb').database }
 
 describe('Consultando dados do DB', () => {
   
   it('[query] consulta pelo "name"', () => {
-    cy.section('consultar e salvar a query')
     cy.findMany({ index: '3' }, options).then(res => {
-      cy.writeFile('cypress/fixtures/query/query_many_name.json', res)
-    })
-
-    cy.section('dados esperados')
-    cy.fixture('query/query_many_name.json').then(res => {
       const data = JSON.stringify(res)
       cy.task('log', data)
 
-      cy.wrap(res[0].name).should('contains', 'Venusaur')
+      expect(res[0].name).to.contain('Venusaur')
     })
   })
 
   it('[query] consulta pelo type "water"', () => {
-    cy.section('consultar e salvar query')
     cy.findMany({ pokemon_type1: 'water' }, options).then(res => {
-      cy.writeFile('cypress/fixtures/query/query_many_type_water.json', res)
-    })
-
-    cy.section('dados esperados')
-    cy.fixture('query/query_many_type_water.json').then(res => {
       const data = JSON.stringify(res)
       cy.task('log', data)
 
-      cy.wrap(res[0].pokemon_type1).should('contains', 'water')
+      expect(res[0].pokemon_type1).to.contain('water')
     })
   })
 
   it('[query] consulta um dado e exclui pelo "index", depois realiza consulta e valida se foi excluído', () => {
     const indexNumber = number.toString()
 
-    cy.section('consultar um e deletar')
-    cy.findOneAndDelete({ index: indexNumber }, options)
-
-    cy.section('consultar')
+    cy.findOneAndDelete({ index: indexNumber }, options).then(res => {
+      cy.task('log', 'Deletado pelo index: ' + res.index)
+    })
     
     cy.findOne({ index: indexNumber }, options).then(res => {
       const data = JSON.stringify(res)
       cy.task('log', data)
 
-      cy.wrap(res).should('not.exist')
+      expect(res).to.not.exist
     })
   })
 
   it('[query] consulta a quantidade de dados "nulos" na coluna "pokemon_type2"', () => {
-    cy.section('consultar e salvar a query')
     cy.findMany({$or: [{ pokemon_type2: { $exists: false } }, { pokemon_type2: '' }]}, options).then(res => {
-      cy.writeFile('cypress/fixtures/query/query_many_null_pokemon_type2.json', res)
-    })
-
-    cy.section('dados esperados')
-    cy.fixture('query/query_many_null_pokemon_type2.json').then(res => {
       const data = JSON.stringify(res)
       cy.task('log', data)
 
-      cy.wrap(res[15].pokemon_type2).should('contains', '')
-      console.log('Quantidade de dados da query: ' + res.length)
+      expect(res[15].pokemon_type2).to.contain('')
+      cy.task('log', 'Quantidade de dados da query: ' + res.length)
     })
   })
 
   it('[query] consulta a quantidade de dados "unknown" na coluna "pokemon_type1"', () => {
-    cy.section('consultar e salvar a query')
     cy.findMany({$or: [{ pokemon_type1: { $exists: false } }, { pokemon_type1: 'unknown' }]}, options).then(res => {
-      cy.writeFile('cypress/fixtures/query/query_many_unknown_pokemon_type1.json', res)
-    })
-
-    cy.section('dados esperados')
-    cy.fixture('query/query_many_unknown_pokemon_type1.json').then(res => {
       const data = JSON.stringify(res)
       cy.task('log', data)
 
-      cy.wrap(res[1].pokemon_type1).should('contains', 'unknown')
-      cy.wrap(res).should('have.length', 5)
-      console.log('Quantidade de dados da query: ' + res.length)
+      expect(res[1].pokemon_type1).to.contain('unknown')
+      expect(res).to.have.length(5)
+      cy.task('log', 'Quantidade de dados da query: ' + res.length)
     })
   })
 
   it('[query] consulta a quantidade de dados "nulos" na coluna "index"', () => {
-    cy.section('consultar e salvar a query')
     cy.findMany({$or: [{ index: { $exists: false } }, { index: '' }]}, options).then(res => {
-      cy.writeFile('cypress/fixtures/query/query_many_null_index.json', res)
-    })
-
-    cy.section('dados esperados')
-    cy.fixture('query/query_many_null_index.json').then(res => {
       const data = JSON.stringify(res)
       cy.task('log', data)
-      
-      cy.wrap(res[1].index).should('contains', '')
-      cy.wrap(res).should('have.length', 5)
+
+      expect(res[1].index).to.contain('')
+      expect(res).to.have.length(5)
     })
   })
 
