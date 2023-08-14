@@ -7,7 +7,8 @@
     "docker:up": "docker-compose up -d",
     "cy:open": "cypress open",
     "cy:run": "cypress run",
-    "massa": "node cypress/mongodb/import.js"
+    "import": "node cypress/mongodb/import.js",
+    "migration": "node cypress/mongodb/migration.js"
   },
   "keywords": [],
   "author": "",
