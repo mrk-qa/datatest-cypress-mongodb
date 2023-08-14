@@ -8,7 +8,10 @@ describe('Performance dos dados ao DB', () => {
     const startTime = Date.now()
 
     cy.wrap(new Promise((resolve) => {
-      cy.findMany({$or: [{ pokemon_type2: { $exists: false } }, { pokemon_type2: '' }]}, options).then(() => {
+      cy.findMany({$or: [{ pokemon_type2: { $exists: false } }, { pokemon_type2: '' }]}, options).then(res => {
+        const data = JSON.stringify(res)
+        cy.task('log', data)
+        
         const endTime = Date.now()
 
         const elapsedTime = endTime - startTime
