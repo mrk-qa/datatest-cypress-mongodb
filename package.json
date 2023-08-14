@@ -19,7 +19,6 @@
     "csv-parser": "^3.0.0",
     "cypress": "^12.2.0",
     "cypress-mongodb": "^5.5.0",
-    "cypress-plugin-steps": "^1.1.1",
     "mongodb": "^5.7.0"
   }
 }
