@@ -45,3 +45,5 @@ async function importCSVToMongoDB() {
 }
 
 importCSVToMongoDB()
+
+module.exports = { uri, dbName, collectionName }
