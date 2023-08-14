@@ -1,9 +1,8 @@
 const { fakerPT_BR: faker } = require('@faker-js/faker')
+const options = { collection: 'types', database: 'pokemon'}
 
 const name = faker.internet.userName().toLowerCase()
 const number = Math.floor(Math.random() * 1000)
-
-const options = { collection: Cypress.env('mongodb').collection, database: Cypress.env('mongodb').database }
 
 describe('Excluindo dados do DB', () => {
 

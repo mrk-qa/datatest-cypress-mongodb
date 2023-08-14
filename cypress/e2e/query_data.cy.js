@@ -1,6 +1,5 @@
 const number = Math.floor(Math.random() * 1000)
-
-const options = { collection: Cypress.env('mongodb').collection, database: Cypress.env('mongodb').database }
+const options = { collection: 'types', database: 'pokemon'}
 
 describe('Consultando dados do DB', () => {
   

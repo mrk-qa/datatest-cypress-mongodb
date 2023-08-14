@@ -1,16 +1,15 @@
 const { defineConfig } = require('cypress')
 const allureWriter = require('@shelex/cypress-allure-plugin/writer')
 const mongo = require('cypress-mongodb')
-const { uri, dbName, collectionName } = require('./cypress/mongodb/import.js')
 
 module.exports = defineConfig({
   projectId: 'eamhmz',
   e2e: {
     env: {
       mongodb: {
-        uri: uri,
-        collection: dbName,
-        database: collectionName,
+        uri: 'mongodb://mrk-qa:admin@localhost:27017/?authMechanism=DEFAULT',
+        collection: 'types',
+        database: 'pokemon',
       },
       allure: true,
       allureResultsPath: 'cypress/reports/allure-results',

@@ -1,4 +1,4 @@
-const options = { collection: Cypress.env('mongodb').collection, database: Cypress.env('mongodb').database }
+const options = { collection: 'types', database: 'pokemon'}
 
 describe('Performance dos dados ao DB', () => {
 
