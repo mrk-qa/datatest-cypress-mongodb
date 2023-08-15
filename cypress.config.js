@@ -3,7 +3,7 @@ const allureWriter = require('@shelex/cypress-allure-plugin/writer')
 const mongo = require('cypress-mongodb')
 
 module.exports = defineConfig({
-  projectId: 'eamhmz',
+  projectId: 'hr8n51',
   e2e: {
     env: {
       mongodb: {
