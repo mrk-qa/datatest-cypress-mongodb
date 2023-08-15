@@ -8,7 +8,9 @@
     "cy:open": "cypress open",
     "cy:run": "cypress run",
     "import": "node cypress/mongodb/import.js",
-    "migration": "node cypress/mongodb/migration.js"
+    "migration": "node cypress/mongodb/migration.js",
+    "allure:generate": "allure generate \"cypress/reports/allure-results\" -o \"cypress/reports/allure-report\"",
+    "msteams": "npx cypress-msteams-reporter --report-path \"cypress/reports/allure-report/widgets/status-chart.json\" --testEnv-path \"cypress/reports/allure-report/widgets/environment.json\" --report-url \"https://mrk-qa.github.io/datatest-cypress-mongodb\""
   },
   "keywords": [],
   "author": "",
